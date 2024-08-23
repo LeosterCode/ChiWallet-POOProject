@@ -5,13 +5,20 @@ La aplicación permite a los usuarios gestionar su dinero de manera digital, inc
 retiros, transferencias entre usuarios y transferencias programadas.  
 
 
-DESCRIPCION DEL PROYECTO	
-ChiWallet es una aplicación diseñada para simular las funcionalidades básicas de una billetera digital. Los usuarios pueden:
-	-Iniciar sesión utilizando nombre de usuario y contraseña.
-	-Depositar dinero (simulado) en su cuenta.
-	-Retirar fondos de su cuenta.
-	-Transferir dinero a otros usuarios dentro de la aplicación.
-	-Programar transferencias automáticas a otros usuarios de la aplicación.
+DESCRIPCION DEL PROYECTO  
+
+ChiWallet es una aplicación diseñada para simular las funcionalidades básicas de una billetera digital. Los usuarios pueden:  
+
+	-Iniciar sesión utilizando nombre de usuario y contraseña.  
+ 
+	-Depositar dinero (simulado) en su cuenta.  
+ 
+	-Retirar fondos de su cuenta.  
+ 
+	-Transferir dinero a otros usuarios dentro de la aplicación.  
+ 
+	-Programar transferencias automáticas a otros usuarios de la aplicación.  
+ 
 
 La aplicación utiliza una base de datos local para almacenar la información de los usuarios y las transacciones.
 
