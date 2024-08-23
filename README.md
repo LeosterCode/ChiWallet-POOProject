@@ -49,7 +49,7 @@ Una vez ejecutada la aplicación, sigue estos pasos básicos:
 	
 	Retirar Dinero: Selecciona la opción de retiro y especifica el monto.  
 	
-	Transferir Dinero: Ingresa el correo del destinatario y el monto a transferir.  
+	Transferir Dinero: Ingresa el nombre de usuario del destinatario y el monto a transferir.  
 	
 	Programar Transferencias: Configura una transferencia automática a otro usuario en una fecha y hora específicas.  
 
