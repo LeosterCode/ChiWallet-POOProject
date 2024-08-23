@@ -1,7 +1,9 @@
-CHIWALLET 	
+CHIWALLET   
+
 ChiWallet es un prototipo de una wallet digital desarrollado para la materia de Programación Orientada a Objetos. 
 La aplicación permite a los usuarios gestionar su dinero de manera digital, incluyendo funcionalidades como depósitos, 
-retiros, transferencias entre usuarios y transferencias programadas.
+retiros, transferencias entre usuarios y transferencias programadas.  
+
 
 DESCRIPCION DEL PROYECTO	
 ChiWallet es una aplicación diseñada para simular las funcionalidades básicas de una billetera digital. Los usuarios pueden:
