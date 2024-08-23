@@ -20,34 +20,49 @@ ChiWallet es una aplicación diseñada para simular las funcionalidades básicas
 	-Programar transferencias automáticas a otros usuarios de la aplicación.  
  
 
-La aplicación utiliza una base de datos local para almacenar la información de los usuarios y las transacciones.
+La aplicación utiliza una base de datos local para almacenar la información de los usuarios y las transacciones.  
+TEGNOLOGIAS UTILIZADAS	  
 
-TEGNOLOGIAS UTILIZADAS	
-Lenguaje de Programación: Python
-Interfaz de Usuario: Tkinter (Python)
-Base de Datos:  SQLite 
-Otras Librerías: 	sqlite3, PIL, datetime.
+	Lenguaje de Programación: Python  
+ 
+	Interfaz de Usuario: Tkinter (Python)  
+ 
+	Base de Datos:  SQLite  
+ 
+	Otras Librerías: sqlite3, PIL, datetime.  
+ 
 
-INSTALACION	
-ChiWallet no requiere un proceso de instalación complejo. Simplemente clona el repositorio y ejecuta el archivo 'Proyecto ChiWallet v7.py' en tu entorno local.
+INSTALACION	  
 
-USO	
-Una vez ejecutada la aplicación, sigue estos pasos básicos:
+	ChiWallet no requiere un proceso de instalación complejo. Simplemente clona el repositorio y ejecuta el archivo 'Proyecto ChiWallet v7.py' en tu entorno local.
 
-Registro: Registrate con tu correo y nombre de usuario
-Iniciar Sesión: Ingresa un nombre de usuario y contraseña para acceder a tu cuenta.
-Depositar Dinero: Selecciona la opción de depósito y especifica el monto.
-Retirar Dinero: Selecciona la opción de retiro y especifica el monto.
-Transferir Dinero: Ingresa el correo del destinatario y el monto a transferir.
-Programar Transferencias: Configura una transferencia automática a otro usuario en una fecha y hora específicas.
-Contribuciones
-Este proyecto es exclusivamente académico y no se aceptan contribuciones externas.
+USO  
+Una vez ejecutada la aplicación, sigue estos pasos básicos:  
 
-AUTORES	
+	Registro: Registrate con tu correo y nombre de usuario  
+	
+	Iniciar Sesión: Ingresa un nombre de usuario y contraseña para acceder a tu cuenta.  
+	
+	Depositar Dinero: Selecciona la opción de depósito y especifica el monto.  
+	
+	Retirar Dinero: Selecciona la opción de retiro y especifica el monto.  
+	
+	Transferir Dinero: Ingresa el correo del destinatario y el monto a transferir.  
+	
+	Programar Transferencias: Configura una transferencia automática a otro usuario en una fecha y hora específicas.  
+
+CONTRIBUCIONES  
+
+Este proyecto es exclusivamente académico y no se aceptan contribuciones externas.  
+
+
+AUTORES	  
+
 	Leonardo Nuñez
 	Ximena Delabra
 	Givanni Davila
 	Marco Sanchez
  
-CONTACTO	
+CONTACTO  
+
 Para cualquier consulta, puedes contactar a los autores a través de sus perfiles en el repositorio de GitHub.
