@@ -5,7 +5,7 @@ import sqlite3
 from tkcalendar import DateEntry
 from PIL import Image, ImageTk 
 import time
-from datetime import datetime, time
+from datetime import date, time
 #---------------FONTS---------------------------#
 font_title = ("Noisy Walk", 18)
 font_balance = ("Open Sans", 20, "bold")
@@ -24,7 +24,7 @@ class ChiWallet:
         self.root.title("ChiWallet")
         self.root.geometry("280x350")
         self.root.config(bg="#003785") #8aeae5
-        self.root.iconbitmap(default="C:\\Users\\soter\\OneDrive\\Universidad\\2DO CUATRIMESTRE\\POO\\ChiCoin\\Codigos y BD\\Images\\CW1.ico")
+        self.root.iconbitmap(default="C:\\Users\\ximen\\OneDrive\\Documents\\UTC\\python\\ChiWallet-POOProject\\Images\\CW1.ico")
         self.root.resizable(0,0)
     
         #Variables contrasena y usuario 
@@ -315,7 +315,7 @@ class ChiWallet:
         
         self.principal_window.config(menu=self.bar_menu)
         
-        route_image = "C:\\Users\\soter\\OneDrive\\Universidad\\2DO CUATRIMESTRE\\POO\\ChiCoin\\Codigos y BD\\Images\\CHIWALLET.png"
+        route_image = "C:\\Users\\ximen\\OneDrive\\Documents\\UTC\\python\\ChiWallet-POOProject\\Images\\CHIWALLET.png"
         image = tk.PhotoImage(file=route_image)
         label_img = tk.Label(self.principal_window, image=image)
         label_img.image = image
@@ -347,12 +347,12 @@ class ChiWallet:
         self.transactions_lbl.config(yscrollcommand=self.scrollbar.set)
         
          #--Declarar img ojo abierto---#
-        self.open_eye = Image.open("C:\\Users\\soter\\OneDrive\\Universidad\\2DO CUATRIMESTRE\\POO\ChiCoin\\Codigos y BD\\Images\\open eye.png")
+        self.open_eye = Image.open("C:\\Users\\ximen\\OneDrive\\Documents\\UTC\\python\\ChiWallet-POOProject\\Images\\open eye.png")
         img_open_eye = self.open_eye.resize((30,30))
         self.render_open_eye = ImageTk.PhotoImage(img_open_eye)
         
         #--Declarar img cerrar cerrado----#
-        self.close_eye = Image.open("C:\\Users\\soter\\OneDrive\\Universidad\\2DO CUATRIMESTRE\\POO\\ChiCoin\\Codigos y BD\\Images\\close eye.png")
+        self.close_eye = Image.open("C:\\Users\\ximen\\OneDrive\\Documents\\UTC\\python\\ChiWallet-POOProject\\Images\\close eye.png")
         img_close_eye = self.close_eye.resize((30,30))
         self.render_close_eye = ImageTk.PhotoImage(img_close_eye)
         
@@ -361,12 +361,12 @@ class ChiWallet:
         self.btn_image_eye = tk.Button(self.principal_window, image=self.render_close_eye, bg="#0069C0", relief="flat", activebackground="#0069C0", command=self.turn_open_eye)
         self.btn_image_eye.place(x=315, y=90)
         
-        #llamamos al metodo de realizar la tranferencia programada 
-        #self.execute_scheduled_transfers()
         #llamamos al metodo para que se esconda la lista de transacciones
         self.hide_transactions_list()
+         #llamamos al metodo de realizar la tranferencia programada 
+        self.do_schedule_transfer()
         
-        self.principal_window.mainloop()
+        self.principal_window.mainloop() 
         
 
 
@@ -538,16 +538,18 @@ class ChiWallet:
         username = self.username_entry.get()
         destination_user = self.destination_user_entry.get()
         self.transfer_date = self.date_entry.get_date()
+        today = date.today()
         done='No'
 
-        #Obtenemos la fecha de hoy y la seleccionada, la convertimos al mismo formato 
-        self.current_date=datetime.now().strftime('%Y-%m-%d')
-        self.transfer_date_str = self.transfer_date.strftime('%Y-%m-%d')
         
-        if self.transfer_date_str < self.current_date:
+        
+        if self.transfer_date < today:
             messagebox.showwarning("Error", "La fecha seleccionada ya pasó")
         else:
             try:
+                # Convertir la fecha a formato de cadena
+                transfer_date_str = self.transfer_date.strftime('%Y-%m-%d')
+
                 self.connection = sqlite3.connect("ChiWallet.db")
                 self.cursor = self.connection.cursor()
                 self.cursor.execute('''
@@ -577,7 +579,7 @@ class ChiWallet:
                         self.cursor.execute('''
                                         INSERT INTO ScheduleTransfers
                                         VALUES (NULL,?,?,?,?,?)
-                                        ''',(self.transfer_date, amount, destination_user, username, done,))
+                                        ''',(transfer_date_str, amount, destination_user, username, done,))
                     
                         messagebox.showinfo("Tranferencia programada",f"Se guardo una tranferencia a:{destination_user} de ${amount} ") 
                         self.connection.commit()
@@ -592,87 +594,72 @@ class ChiWallet:
 
 
 #-------------------------METODO PARA QUE SE REALICE LA TRANSFERENCIA PROGRAMADA-------------------------------------------    
-    def do_schedule_transfer(self, transfer_id, amount, destination_user, username, current_date):
+    def do_schedule_transfer(self):
+        username = self.username_entry.get()
         try:
-            # Realizar la transferencia en la base de datos
+            realizado = 'No'
+            today_str = date.today().strftime('%Y-%m-%d')
             self.cursor.execute('''
-                UPDATE UserChiWallet 
-                SET BALANCE = BALANCE + ? 
-                WHERE USUARIO = ? 
-            ''',(amount, destination_user))
-                
-            self.cursor.execute('''
-                UPDATE UserChiWallet 
-                SET BALANCE = BALANCE - ? 
-                WHERE USUARIO = ?
-            ''',(amount, username))
-        
-                
-            # Registrar la transferencia en el registro de transacciones
-            chain_destination_user = (f"Transferencia Programada a:{destination_user}")
-            chain_user = (f"Recibiste Pago Domiciliado de:{username}")
-            chain_amount = (f"${amount}")
-            
-            self.cursor.execute('''
-                INSERT INTO Transactions
-                VALUES (NULL,?,?,?)
-                
-            ''', (chain_destination_user, chain_amount, username))
-            self.cursor.execute('''
-                INSERT INTO Transactions
-                VALUES (NULL,?,?,?)
-            ''',(chain_user, chain_amount, destination_user))
-            
-            
-            self.transfer_done()
+                                SELECT IDST, AMOUNT, DESTINATION
+                                FROM ScheduleTransfers
+                                WHERE  USUARIO = ? AND DATE = ? AND REALIZADO = ?
+                                ''', (username, today_str, realizado,))
+            transfer = self.cursor.fetchone()
+            if transfer:  # Si hay un resultado
+                idst = transfer[0]
+                amount = transfer[1]
+                destination_user = transfer[2]
+                done="SI"
+                if self.enough_balance()>=amount:
+                    self.cursor.execute('''
+                                        UPDATE UserChiWallet 
+                                        SET BALANCE = BALANCE + ? 
+                                        WHERE USUARIO = ?
+                                        ''',(amount, destination_user))
+                    self.cursor.execute('''
+                                        UPDATE UserChiWallet 
+                                        SET BALANCE = BALANCE - ? 
+                                        WHERE USUARIO = ?
+                                        ''',(amount, username))
+                    self.cursor.execute('''
+                                        UPDATE ScheduleTransfers
+                                        SET REALIZADO = ?
+                                        WHERE IDST = ?
+                                        ''', (done, idst))
+                    
+                    # Registrar la transferencia en el registro de transacciones
+                    chain_destination_user = (f"Transferencia Programada a:{destination_user}")
+                    chain_user = (f"Recibiste Pago Domiciliado de:{username}")
+                    chain_amount = (f"${amount}")
+
+                    self.cursor.execute('''
+                                        INSERT INTO Transactions
+                                        VALUES (NULL,?,?,?)
+                                        ''', (chain_destination_user, chain_amount, username))
+                    self.cursor.execute('''
+                                        INSERT INTO Transactions
+                                        VALUES (NULL,?,?,?)
+                                        ''',(chain_user, chain_amount, destination_user))
+                        
+                    self.connection.commit()
+                    messagebox.showinfo("Transferencia Programada", f"Se ha realizado una transferencia de ${amount} de {username} a {destination_user}")
+                                    
+                    self.cursor.execute('''
+                                        DELETE FROM ScheduleTransfers
+                                        WHERE IDST = ?
+                                        ''', (idst,))
+                    self.connection.commit()  
+                else:
+                    messagebox.showwarning("Advertencia", "Saldo insuficiente, no fue posible realizar la transferencia programada")    
+
+            else:
+                print("No se encontraron transferencias programadas para hoy.")
 
         except sqlite3.Error as error:
             print("Error en la base de datos:", error)
             messagebox.showerror("Error", "Error en la base de datos: " + str(error))
             
-            
- #------------------------METODO PARA EJECUTAR LA TRNAFERENCIA PROGRAMADA-----------------------------           
-    def execute_scheduled_transfers(self):
-        try:
-            self.connection = sqlite3.connect("ChiWallet.db")
-            self.cursor = self.connection.cursor()
-            
-            # Obtener las transferencias programadas para la fecha actual
-            current_date = datetime.now().strftime('%Y-%m-%d')
-            self.cursor.execute('''
-                SELECT *
-                FROM ScheduleTransfers
-                WHERE DATE = ? AND REALIZADO = 'No'
-            ''', (current_date,))
-            
-            scheduled_transfers = self.cursor.fetchall()
-            
-            for transfer in scheduled_transfers:
-                transfer_id, transfer_date, amount, destination_user, username, done = transfer
-                
-                # Realizar la transferencia
-                self.do_schedule_transfer(transfer_id, amount, destination_user, username, current_date)
-                
-          
-            self.connection.commit()
-            
-    
-            
-        except sqlite3.Error as error:
-            print("Error en la base de datos:", error)
-            messagebox.showerror("Error", "Error en la base de datos: " + str(error))
 
-
-    def transfer_done(self):
-        done = "Si"
-        try:
-            self.cursor.execute('''
-                                UPDATE ScheduleTransfers
-                                SET REALIZADO = ?
-                                WHERE DATE = ?
-                                ''',(done, self.current_date))
-        except:
-            messagebox.showerror("Error","Erro al registrar la transferencia registrada")
 #-------------------------METODO PARA RETIRAR------------------------------------------------------------ 
     def widthdraw (self):
         username = self.username_entry.get()
