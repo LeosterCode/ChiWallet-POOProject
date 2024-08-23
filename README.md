@@ -20,7 +20,9 @@ ChiWallet es una aplicación diseñada para simular las funcionalidades básicas
 	-Programar transferencias automáticas a otros usuarios de la aplicación.  
  
 
-La aplicación utiliza una base de datos local para almacenar la información de los usuarios y las transacciones.  
+La aplicación utiliza una base de datos local para almacenar la información de los usuarios y las transacciones.    
+
+  
 TEGNOLOGIAS UTILIZADAS	  
 
 	Lenguaje de Programación: Python  
