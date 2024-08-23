@@ -24,7 +24,9 @@ class ChiWallet:
         self.root.title("ChiWallet")
         self.root.geometry("280x350")
         self.root.config(bg="#003785") #8aeae5
-        self.root.iconbitmap(default="C:\\Users\\ximen\\OneDrive\\Documents\\UTC\\python\\ChiWallet-POOProject\\Images\\CW1.ico")
+                
+
+        self.root.iconbitmap(default="Images/CW1.ico")
         self.root.resizable(0,0)
     
         #Variables contrasena y usuario 
@@ -315,7 +317,7 @@ class ChiWallet:
         
         self.principal_window.config(menu=self.bar_menu)
         
-        route_image = "C:\\Users\\ximen\\OneDrive\\Documents\\UTC\\python\\ChiWallet-POOProject\\Images\\CHIWALLET.png"
+        route_image = "Images/CHIWALLET.png"
         image = tk.PhotoImage(file=route_image)
         label_img = tk.Label(self.principal_window, image=image)
         label_img.image = image
@@ -347,12 +349,12 @@ class ChiWallet:
         self.transactions_lbl.config(yscrollcommand=self.scrollbar.set)
         
          #--Declarar img ojo abierto---#
-        self.open_eye = Image.open("C:\\Users\\ximen\\OneDrive\\Documents\\UTC\\python\\ChiWallet-POOProject\\Images\\open eye.png")
+        self.open_eye = Image.open("Images/open eye.png")
         img_open_eye = self.open_eye.resize((30,30))
         self.render_open_eye = ImageTk.PhotoImage(img_open_eye)
         
         #--Declarar img cerrar cerrado----#
-        self.close_eye = Image.open("C:\\Users\\ximen\\OneDrive\\Documents\\UTC\\python\\ChiWallet-POOProject\\Images\\close eye.png")
+        self.close_eye = Image.open("Images/close eye.png")
         img_close_eye = self.close_eye.resize((30,30))
         self.render_close_eye = ImageTk.PhotoImage(img_close_eye)
         
