@@ -1,9 +1,9 @@
-CHIWALLET
+CHIWALLET 	
 ChiWallet es un prototipo de una wallet digital desarrollado para la materia de Programación Orientada a Objetos. 
 La aplicación permite a los usuarios gestionar su dinero de manera digital, incluyendo funcionalidades como depósitos, 
 retiros, transferencias entre usuarios y transferencias programadas.
 
-DESCRIPCION DEL PROYECTO
+DESCRIPCION DEL PROYECTO	
 ChiWallet es una aplicación diseñada para simular las funcionalidades básicas de una billetera digital. Los usuarios pueden:
 	-Iniciar sesión utilizando nombre de usuario y contraseña.
 	-Depositar dinero (simulado) en su cuenta.
@@ -13,16 +13,16 @@ ChiWallet es una aplicación diseñada para simular las funcionalidades básicas
 
 La aplicación utiliza una base de datos local para almacenar la información de los usuarios y las transacciones.
 
-TEGNOLOGIAS UTILIZADAS
+TEGNOLOGIAS UTILIZADAS	
 Lenguaje de Programación: Python
 Interfaz de Usuario: Tkinter (Python)
 Base de Datos:  SQLite 
 Otras Librerías: 	sqlite3, PIL, datetime.
 
-INSTALACION
+INSTALACION	
 ChiWallet no requiere un proceso de instalación complejo. Simplemente clona el repositorio y ejecuta el archivo 'Proyecto ChiWallet v7.py' en tu entorno local.
 
-USO
+USO	
 Una vez ejecutada la aplicación, sigue estos pasos básicos:
 
 Registro: Registrate con tu correo y nombre de usuario
@@ -34,11 +34,11 @@ Programar Transferencias: Configura una transferencia automática a otro usuario
 Contribuciones
 Este proyecto es exclusivamente académico y no se aceptan contribuciones externas.
 
-AUTORES
+AUTORES	
 	Leonardo Nuñez
 	Ximena Delabra
 	Givanni Davila
 	Marco Sanchez
  
-CONTACTO
+CONTACTO	
 Para cualquier consulta, puedes contactar a los autores a través de sus perfiles en el repositorio de GitHub.
